@@ -1,8 +1,9 @@
-import { KeyRound } from 'lucide-react';
+import { REGEXP_ONLY_DIGITS } from 'input-otp';
+import { CheckCircle2, KeyRound } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardTitle } from '@/components/ui/card';
 import { FieldDescription } from '@/components/ui/field';
-import { Input } from '@/components/ui/input';
+import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@/components/ui/input-otp';
 
 type Props = {
   phone: string;
@@ -18,9 +19,23 @@ export function WaRegistrationOtpCard({ phone, verificationRequestID, value, bus
     <Card className="border-dashed">
       <CardContent className="grid gap-2 p-3">
         <CardTitle className="inline-flex items-center gap-2 text-sm"><KeyRound size={15} />输入注册 OTP</CardTitle>
-        <div className="flex gap-2">
-          <Input value={value} onChange={(event) => onChange(event.target.value)} inputMode="numeric" autoComplete="one-time-code" type="password" placeholder="验证码" disabled={busy} />
-          <Button type="button" disabled={busy || !value.trim()} onClick={onSubmit}>提交</Button>
+        <div className="flex items-center gap-2">
+          <InputOTP maxLength={8} value={value} onChange={onChange} pattern={REGEXP_ONLY_DIGITS} inputMode="numeric" autoComplete="one-time-code" disabled={busy}>
+            <InputOTPGroup>
+              <InputOTPSlot index={0} />
+              <InputOTPSlot index={1} />
+              <InputOTPSlot index={2} />
+              <InputOTPSlot index={3} />
+            </InputOTPGroup>
+            <InputOTPSeparator />
+            <InputOTPGroup>
+              <InputOTPSlot index={4} />
+              <InputOTPSlot index={5} />
+              <InputOTPSlot index={6} />
+              <InputOTPSlot index={7} />
+            </InputOTPGroup>
+          </InputOTP>
+          <Button type="button" size="icon" disabled={busy || !value.trim()} title="提交 OTP" aria-label="提交 OTP" onClick={onSubmit}><CheckCircle2 size={14} /></Button>
         </div>
         <FieldDescription>{phone}{verificationRequestID ? ` · ${verificationRequestID}` : ''}</FieldDescription>
       </CardContent>
