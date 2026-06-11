@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
-import { Info, Loader2, PanelLeftClose, PanelLeftOpen, Plus, Search } from 'lucide-react';
+import { Info, Loader2, PanelLeftClose, PanelLeftOpen, Plus } from 'lucide-react';
 import { Link, NavLink } from 'react-router';
 import type { LongConnectionState } from '../proto/byte/v/forge/waapp/v1/messaging';
 import type { WAAccount } from '../proto/byte/v/forge/waapp/v1/profile';
@@ -11,8 +11,6 @@ import { WaConnectionDot } from './wa-connection-dot';
 import { waAccountPath, waChatsPath } from './wa-route-paths';
 import {
   Button,
-  ButtonGroup,
-  ButtonGroupText,
   Empty,
   EmptyDescription,
   EmptyHeader,
@@ -95,10 +93,7 @@ function RailBrand({ count }: { count: number }) {
 
 function RailSearch({ value, onChange }: { value: string; onChange: (value: string) => void }) {
   return (
-    <ButtonGroup className="w-full">
-      <ButtonGroupText className="h-8 bg-background px-2 text-muted-foreground"><Search className="size-4" /></ButtonGroupText>
-      <SidebarInput value={value} onChange={(event) => onChange(event.target.value)} placeholder="搜索手机号或账号 ID" aria-label="搜索账号" />
-    </ButtonGroup>
+    <SidebarInput value={value} onChange={(event) => onChange(event.target.value)} placeholder="搜索手机号或账号 ID" aria-label="搜索账号" />
   );
 }
 

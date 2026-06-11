@@ -1,6 +1,6 @@
 import type { MouseEvent } from 'react';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Loader2, Search, Trash2 } from 'lucide-react';
+import { Loader2, Trash2 } from 'lucide-react';
 import { NavLink } from 'react-router';
 import { WAContactKind } from '../proto/byte/v/forge/waapp/v1/contacts';
 import type { WaContact } from './wa-chat-model';
@@ -20,10 +20,7 @@ export function WaContactList({ accountID, contacts, selectedID, loading, error,
         {loading && <Loader2 className="size-4 animate-spin text-muted-foreground" />}
       </header>
       <div className="px-3 pb-3">
-        <div className="relative">
-          <Search className="pointer-events-none absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-          <Input className="h-10 rounded-xl bg-muted/50 pl-8" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索联系人" aria-label="搜索联系人" />
-        </div>
+        <Input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索联系人" aria-label="搜索联系人" />
       </div>
       <div className="min-h-0 overflow-y-auto p-2">
         {error && <p className="rounded-xl border border-destructive/30 p-3 text-sm text-destructive">{error}</p>}

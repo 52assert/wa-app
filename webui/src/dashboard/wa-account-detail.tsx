@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { KeyRound, Shield, Trash2 } from 'lucide-react';
+import { KeyRound, Shield } from 'lucide-react';
 import { WAAccountStatus } from '../proto/byte/v/forge/waapp/v1/profile';
 import type { ClientProfile, WAAccount } from '../proto/byte/v/forge/waapp/v1/profile';
 import { submitWaRegistrationOTP, waAccountID, waAccountTitle } from './wa-api';
@@ -8,9 +8,9 @@ import { WaAccountSecurityPanel } from './wa-account-security';
 import { WaDeviceFingerprintPanel } from './wa-device-fingerprint';
 import { Badge, Button, Input } from './ui';
 
-type Props = { account: WAAccount; profiles: ClientProfile[]; profilesLoading: boolean; busy: boolean; onDelete: (account: WAAccount) => void; onDone: (message: string) => void; onError: (message: string) => void; onAvatarChanged: () => void };
+type Props = { account: WAAccount; profiles: ClientProfile[]; profilesLoading: boolean; busy: boolean; onDone: (message: string) => void; onError: (message: string) => void; onAvatarChanged: () => void };
 
-export function WaAccountDetail({ account, profiles, profilesLoading, busy, onDelete, onDone, onError, onAvatarChanged }: Props) {
+export function WaAccountDetail({ account, profiles, profilesLoading, busy, onDone, onError, onAvatarChanged }: Props) {
   return (
     <section className="grid gap-4">
       <header className="flex items-start justify-between gap-3">
@@ -22,7 +22,6 @@ export function WaAccountDetail({ account, profiles, profilesLoading, busy, onDe
       <WaAccountProfileSettings account={account} onDone={onDone} onError={onError} onAvatarChanged={onAvatarChanged} />
       <details className="rounded-xl border border-border p-3"><summary className="cursor-pointer text-sm font-semibold">设备指纹</summary><div className="mt-3"><WaDeviceFingerprintPanel profiles={profiles} loading={profilesLoading} /></div></details>
       <details className="rounded-xl border border-border p-3"><summary className="inline-flex cursor-pointer items-center gap-2 text-sm font-semibold"><Shield size={15} />安全设置</summary><div className="mt-3"><WaAccountSecurityPanel account={account} onDone={onDone} onError={onError} /></div></details>
-      <details className="rounded-xl border border-destructive/30 p-3"><summary className="cursor-pointer text-sm font-semibold text-destructive">危险操作</summary><div className="mt-3"><Button variant="destructive" disabled={busy} onClick={() => onDelete(account)}><Trash2 size={14} />删除账号</Button></div></details>
     </section>
   );
 }

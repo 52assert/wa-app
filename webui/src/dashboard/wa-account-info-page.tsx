@@ -1,10 +1,11 @@
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Trash2 } from 'lucide-react';
 import { Link } from 'react-router';
 import type { ClientProfile, WAAccount } from '../proto/byte/v/forge/waapp/v1/profile';
 import { waAccountID, waAccountTitle } from './wa-api';
 import { WaAccountDetail } from './wa-account-detail';
 import { WhatsAppIcon } from './wa-brand-icon';
 import { waChatsPath } from './wa-route-paths';
+import { Button } from './ui';
 
 export function WaAccountInfoPage({ account, profiles, profilesLoading, busy, onDelete, onDone, onError, onAvatarChanged }: { account: WAAccount; profiles: ClientProfile[]; profilesLoading: boolean; busy: boolean; onDelete: (account: WAAccount) => void; onDone: (message: string) => void; onError: (message: string) => void; onAvatarChanged: () => void }) {
   return (
@@ -15,10 +16,11 @@ export function WaAccountInfoPage({ account, profiles, profilesLoading, busy, on
           <span className="grid size-10 place-items-center rounded-full bg-emerald-50"><WhatsAppIcon className="size-7" /></span>
           <div className="min-w-0"><h1 className="truncate text-base font-semibold">{waAccountTitle(account)}</h1><p className="truncate font-mono text-xs text-muted-foreground">{waAccountID(account)}</p></div>
         </div>
+        <Button variant="destructive" size="icon" disabled={busy} title="删除账号" aria-label="删除账号" onClick={() => onDelete(account)}><Trash2 size={16} /></Button>
       </header>
       <main className="min-h-0 overflow-y-auto p-6">
         <div className="mx-auto max-w-3xl rounded-3xl border border-border bg-card p-5 shadow-sm">
-          <WaAccountDetail account={account} profiles={profiles} profilesLoading={profilesLoading} busy={busy} onDelete={onDelete} onDone={onDone} onError={onError} onAvatarChanged={onAvatarChanged} />
+          <WaAccountDetail account={account} profiles={profiles} profilesLoading={profilesLoading} busy={busy} onDone={onDone} onError={onError} onAvatarChanged={onAvatarChanged} />
         </div>
       </main>
     </section>
