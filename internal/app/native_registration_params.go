@@ -150,9 +150,6 @@ func codeDeviceMap(method string, state nativeState) map[string]string {
 	out := map[string]string{
 		"reason":                     "",
 		"client_metrics":             nativeCodeClientMetrics(),
-		"clicked_education_link":     "false",
-		"manage_call_permission":     "false",
-		"call_log_permission":        "false",
 		"education_screen_displayed": "false",
 		"prefer_sms_over_flash":      nativePreferSMSOverFlash(method),
 		"_ge":                        `{"sb":false,"sv":false}`,
