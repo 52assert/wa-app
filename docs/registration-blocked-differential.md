@@ -21,6 +21,7 @@
 - `/v2/register` 附加 map 改为 App `A0F(msys/verify)` 形态，移除 register 阶段不应携带的 `hasav/reason/device_ram/db/recaptcha/education_screen_displayed/prefer_sms_over_flash/feo2_query_status`。
 - `nativePhoneProfile` 增加 profile 级 `pid`，旧 profile 缺失时使用 App capture 中同形态的默认 PID。
 - `/v2/code` map 补 `pid`，避免字段集少于 App capture。
+- `/v2/code`、`/v2/register` 在无运营商信息时按 APK capture 保留 `mcc/mnc/sim_mcc/sim_mnc=000`，不再省略为空的运营商字段。
 - `/v2/exist` map 补 `pid`。
 - 运行态 `/v2/exist`、`/v2/code` 自动注入 `gpia/_gi/_gg/_gp/_ga/aid`：`gpia/_gi/_gg` fresh，`_gp/_ga/aid` profile-stable，长度和编码对齐 App capture。
 - 默认 App version / User-Agent 升级到 `2.26.22.78`；加载旧 native profile 时只刷新 UA 版本，保留设备型号、Android 版本和稳定 profile 材料。
